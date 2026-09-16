@@ -200,8 +200,6 @@ static const struct vb2_ops gvusb2_vb2_ops = {
 	.buf_queue       = gvusb2_vb2_buf_queue,
 	.start_streaming = gvusb2_vb2_start_streaming,
 	.stop_streaming  = gvusb2_vb2_stop_streaming,
-	.wait_prepare    = vb2_ops_wait_prepare,
-	.wait_finish     = vb2_ops_wait_finish,
 };
 
 int gvusb2_vb2_setup(struct gvusb2_vid *dev)
@@ -332,10 +330,10 @@ static int gvusb2_vidioc_enum_input(struct file *file, void *priv,
 
 	switch (i->index) {
 	case GVUSB2_INPUT_COMPOSITE:
-		strncpy(i->name, "Composite", sizeof(i->name));
+		strscpy(i->name, "Composite", sizeof(i->name));
 		break;
 	case GVUSB2_INPUT_SVIDEO:
-		strncpy(i->name, "S-Video", sizeof(i->name));
+		strscpy(i->name, "S-Video", sizeof(i->name));
 		break;
 	default:
 		return -EINVAL;
