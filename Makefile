@@ -6,7 +6,10 @@ gvusb2-video-y:=gvusb2-vid.o gvusb2-v4l2.o gvusb2-core.o gvusb2-i2c.o
 KERNELRELEASE?=$(shell uname -r)
 
 all:
-	make -C /lib/modules/$(KERNELRELEASE)/build M=$(PWD) modules
+	make -C /lib/modules/$(KERNELRELEASE)/build M=$(shell pwd) modules
+
+install:
+	make -C /lib/modules/$(KERNELRELEASE)/build M=$(shell pwd) modules_install
 
 clean:
-	make -C /lib/modules/$(KERNELRELEASE)/build M=$(PWD) clean
+	make -C /lib/modules/$(KERNELRELEASE)/build M=$(shell pwd) clean
